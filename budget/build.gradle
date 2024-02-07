@@ -36,6 +36,31 @@ dependencies {
 //    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+
+// submodule copyPrivate
 tasks.named('test') {
     useJUnitPlatform()
+    dependsOn 'copyPrivate'
+}
+
+tasks.named('compileJava') {
+    dependsOn 'copyPrivate'
+}
+
+// submodule copyPrivate
+tasks.register('copyPrivate') {
+    copy {
+        from './ProjectConfig/accountbookConfig/main'
+        include "*.yml"
+        into 'src/main/resources'
+    }
+
+    copy {
+        from './ProjectConfig/accountbookConfig/test'
+        include "*.yml"
+        into 'src/test/resources'
+    }
 }
