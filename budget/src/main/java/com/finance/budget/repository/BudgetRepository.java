@@ -3,10 +3,12 @@ package com.finance.budget.repository;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
 @Repository
+@Transactional
 @RequiredArgsConstructor
 public class BudgetRepository {
     private final SqlSessionTemplate sql;
