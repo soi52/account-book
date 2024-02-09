@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Budget">
+    <select id="count" parameterType="hashMap" resultType="int">
+        SELECT COUNT(*)
+        FROM month_category_money
+        WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
+    </select>
+</mapper>
