@@ -8,4 +8,12 @@
         FROM month_category_money
         WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
     </select>
+
+    <insert id="write" parameterType="java.util.List">
+        INSERT INTO month_category_money (total_money, `current_date`, user_id, category_id)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.totalMoney}, #{item.currentDate}, #{item.userId}, #{item.categoryId})
+        </foreach>
+    </insert>
 </mapper>

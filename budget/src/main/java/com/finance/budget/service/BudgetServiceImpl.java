@@ -1,10 +1,13 @@
 package com.finance.budget.service;
 
+import com.finance.budget.dto.BudgetRequestDto;
+import com.finance.budget.exception.writeBudgetException;
 import com.finance.budget.repository.BudgetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,5 +30,15 @@ public class BudgetServiceImpl implements BudgetService {
             checkWrite.put("checkBudgetWrite", false);
 
         return checkWrite;
+    }
+
+    @Override
+    public void writeBudget(int userId, List<BudgetRequestDto> budgetRequestDtos) {
+        for (BudgetRequestDto budgetRequestDto : budgetRequestDtos) {
+            budgetRequestDto.setUserId(userId);
+        }
+        int check = budgetRepository.writeBudget(budgetRequestDtos);
+        if (check < 1)
+            throw new writeBudgetException("한달 예산 작성 중 오류 발생");
     }
 }
