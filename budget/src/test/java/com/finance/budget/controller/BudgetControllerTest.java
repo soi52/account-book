@@ -2,6 +2,7 @@ package com.finance.budget.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.dto.BudgetRequestDto;
+import com.finance.budget.dto.BudgetResponseDto;
 import com.finance.budget.service.BudgetService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -103,6 +104,29 @@ public class BudgetControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @DisplayName("작성된 예산 읽기")
+    @Test
+    public void readBudgetTrue() throws Exception {
+        // given
+        int userId = 1, year = 2024, month = 1;
+
+        List<BudgetResponseDto> budgetResponseDtos = new ArrayList<>();
+        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 3, 1000, 10000, Timestamp.valueOf("2024-01-01 09:00:00")));
+        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 4, 2000, 20000, Timestamp.valueOf("2024-01-01 09:00:00")));
+
+        // when
+        doReturn(budgetResponseDtos).when(budgetService).readBudget(userId, year, month);
+
+         String output = new ObjectMapper().writeValueAsString(budgetResponseDtos);
+
+        //then
+        mockMvc.perform(get("/budget/2024/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(content().string(output))
                 .andDo(print());
     }
 }

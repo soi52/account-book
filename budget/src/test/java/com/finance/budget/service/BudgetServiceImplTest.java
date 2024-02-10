@@ -1,6 +1,7 @@
 package com.finance.budget.service;
 
 import com.finance.budget.dto.BudgetRequestDto;
+import com.finance.budget.dto.BudgetResponseDto;
 import com.finance.budget.exception.writeBudgetException;
 import com.finance.budget.repository.BudgetRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -121,5 +122,30 @@ public class BudgetServiceImplTest {
             // 오류 변경
             // (check < 1>) -> (check != budgetRequestDtos.size())
         }
+    }
+
+    @DisplayName("작성된 예산 읽기")
+    @Test
+    public void readBudget() {
+        // given
+        int userId = 1, year = 2024, month = 1;
+
+        // when
+        Map<String, Integer> date = new HashMap<>();
+        date.put("userId", userId);
+        date.put("year", year);
+        date.put("month", month);
+
+        BudgetResponseDto budgetResponseDto1 = new BudgetResponseDto(1, 1, 3, 0, 10000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        BudgetResponseDto budgetResponseDto2 = new BudgetResponseDto(2, 1, 4, 0, 20000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        List<BudgetResponseDto> budgetResponseDtos = List.of(budgetResponseDto1, budgetResponseDto2);
+
+        // doReturn(budgetResponseDtos).when(budgetRepository).readBudget(date);
+        when(budgetRepository.readBudget(date)).thenReturn(budgetResponseDtos);
+
+        List<BudgetResponseDto> budgetResponseDtoList = budgetService.readBudget(userId, year, month);
+
+        // then
+        assertThat(budgetResponseDtos).isEqualTo(budgetResponseDtoList);
     }
 }
