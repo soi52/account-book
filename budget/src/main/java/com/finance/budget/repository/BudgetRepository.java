@@ -1,6 +1,7 @@
 package com.finance.budget.repository;
 
 import com.finance.budget.dto.BudgetRequestDto;
+import com.finance.budget.dto.BudgetResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,9 @@ public class BudgetRepository {
 
     public int writeBudget(List<BudgetRequestDto> budgetRequestDtos) {
         return sql.insert("Budget.write", budgetRequestDtos);
+    }
+
+    public List<BudgetResponseDto> readBudget(Map<String, Integer> date) {
+        return sql.selectList("Budget.read", date);
     }
 }

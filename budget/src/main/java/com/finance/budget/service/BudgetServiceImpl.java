@@ -1,6 +1,7 @@
 package com.finance.budget.service;
 
 import com.finance.budget.dto.BudgetRequestDto;
+import com.finance.budget.dto.BudgetResponseDto;
 import com.finance.budget.exception.writeBudgetException;
 import com.finance.budget.repository.BudgetRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,15 @@ public class BudgetServiceImpl implements BudgetService {
         int check = budgetRepository.writeBudget(budgetRequestDtos);
         if (check != budgetRequestDtos.size())
             throw new writeBudgetException("한달 예산 작성 중 오류 발생");
+    }
+
+    @Override
+    public List<BudgetResponseDto> readBudget(int userId, int year, int month) {
+        Map<String, Integer> date = new HashMap<>();
+        date.put("userId", userId);
+        date.put("year", year);
+        date.put("month", month);
+
+        return budgetRepository.readBudget(date);
     }
 }

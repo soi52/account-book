@@ -16,4 +16,15 @@
             (#{item.totalMoney}, #{item.currentDate}, #{item.userId}, #{item.categoryId})
         </foreach>
     </insert>
+
+    <select id="read" parameterType="hashMap" resultType="com.finance.budget.dto.BudgetResponseDto">
+        SELECT mc.id, user_id, category_id, current_money, total_money, `current_date`
+        FROM month_category_money as mc
+            LEFT JOIN category_big as cb
+                ON mc.category_id = cb.id
+        WHERE user_id = #{userId}
+          AND YEAR(`current_date`) = #{year}
+          AND MONTH(`current_date`) = #{month}
+          AND `type` NOT IN ('수입', '저금');
+    </select>
 </mapper>
