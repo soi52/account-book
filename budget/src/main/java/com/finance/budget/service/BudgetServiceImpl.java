@@ -38,7 +38,7 @@ public class BudgetServiceImpl implements BudgetService {
             budgetRequestDto.setUserId(userId);
         }
         int check = budgetRepository.writeBudget(budgetRequestDtos);
-        if (check < 1)
+        if (check != budgetRequestDtos.size())
             throw new writeBudgetException("한달 예산 작성 중 오류 발생");
     }
 }
