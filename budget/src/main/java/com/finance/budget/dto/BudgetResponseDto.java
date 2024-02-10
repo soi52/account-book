@@ -19,5 +19,4 @@ public class BudgetResponseDto {
     private int currentMoney; // 카테고리 별 사용 금액
     private int totalMoney; // 카테고리 별 예산 금액
     private Timestamp currentDate; // 예산 해당 년, 월 (날짜)
-
 }

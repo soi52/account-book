@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class BudgetRequestDto {
     // 가계부 예산 작성 Request DTO
     private int userId; // user id (fk)
