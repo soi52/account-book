@@ -25,6 +25,10 @@ public class BudgetRepository {
         return sql.insert("Budget.write", budgetRequestDtos);
     }
 
+    public int writeMonth(BudgetRequestDto currentDate) {
+        return sql.insert("Budget.writeMonth", currentDate);
+    }
+
     public List<BudgetResponseDto> readBudget(Map<String, Integer> date) {
         return sql.selectList("Budget.read", date);
     }

@@ -41,6 +41,11 @@ public class BudgetServiceImpl implements BudgetService {
         int check = budgetRepository.writeBudget(budgetRequestDtos);
         if (check != budgetRequestDtos.size())
             throw new writeBudgetException("한달 예산 작성 중 오류 발생");
+
+        // 한 달 총 금액 및 사용 금액 초기값 입력
+        check = budgetRepository.writeMonth(budgetRequestDtos.get(0));
+        if (check == 0)
+            throw new writeBudgetException("한달 예산 작성 중 오류 발생");
     }
 
     @Override
