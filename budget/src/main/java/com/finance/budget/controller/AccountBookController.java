@@ -1,6 +1,7 @@
 package com.finance.budget.controller;
 
 import com.finance.budget.dto.AccountBookRequestDto;
+import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.service.AccountBookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class AccountBookController {
         return accountBookService.readCategorySmall(cateBig);
     }
 
-    @Operation(summary = "가계부 작성", description = "가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모 -> 월별, 카테고리 통계 영향")
+    @Operation(summary = "가계부 작성", description = "가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 내역 및 메모 -> 월별, 카테고리 통계 영향")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void writeAccountBook(@RequestBody AccountBookRequestDto accountBookRequestDto) {
@@ -41,7 +42,24 @@ public class AccountBookController {
         accountBookService.writeAccountBook(userId, accountBookRequestDto);
     }
 
-//    @Operation(summary = "가계부 읽기", description = "가계부 읽기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모")
+    @Operation(summary = "날짜별 가계부 읽기", description = "가계부 읽기 - 금액, 카테고리, 날짜, 내역")
+    @GetMapping("/{year}/{month}/{day}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AccountBookResponseDto> readDayAccountBook(@PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        return accountBookService.readDayAccountBook(userId, year, month, day);
+    }
+
+    @Operation(summary = "가계부 읽기", description = "가계부 읽기 - 금액, 카테고리, 날짜, 내역 및 메모")
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public AccountBookResponseDto readAccountBook(@PathVariable("id") int id) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        return accountBookService.readAccountBook(userId, id);
+    }
+
 //    @Operation(summary = "가계부 수정", description = "가계부 수정하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모 -> 월별, 카테고리 통계 영향")
 //    @Operation(summary = "가계부 삭제", description = "가계부 삭제하기 - id 기준으로 삭제 -> 월별, 카테고리 통계 영향")
 }

@@ -1,6 +1,7 @@
 package com.finance.budget.repository;
 
 import com.finance.budget.dto.AccountBookRequestDto;
+import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,5 +35,13 @@ public class AccountBookRepository {
 
     public int updateMonth(Map<String, Integer> statis) {
         return sql.update("AccountBook.updateMonth", statis);
+    }
+
+    public List<AccountBookResponseDto> readDayAccountBook(Map<String, Integer> date) {
+        return sql.selectList("AccountBook.readDay", date);
+    }
+
+    public AccountBookResponseDto readAccountBook(Map<String, Integer> account) {
+        return sql.selectOne("AccountBook.read", account);
     }
 }

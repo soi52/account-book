@@ -1,6 +1,7 @@
 package com.finance.budget.service;
 
 import com.finance.budget.dto.AccountBookRequestDto;
+import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.exception.writeAccountBookException;
 import com.finance.budget.repository.AccountBookRepository;
@@ -36,7 +37,7 @@ public class AccountBookServiceImpl implements AccountBookService {
 
     @Override
     public void writeAccountBook(int userId, AccountBookRequestDto accountBookRequestDto) {
-        // 가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모 -> 월별, 카테고리 통계 영향
+        // 가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 내역 및 메모 -> 월별, 카테고리 통계 영향
         accountBookRequestDto.setUserId(userId);
 
         int check = 0;
@@ -72,5 +73,27 @@ public class AccountBookServiceImpl implements AccountBookService {
         check = accountBookRepository.updateMonth(statis);
         if (check == 0)
             throw new writeAccountBookException("예산 작성 후 월별 통계 변경 중 오류 발생");
+    }
+
+    @Override
+    public List<AccountBookResponseDto> readDayAccountBook(int userId, int year, int month, int day) {
+        // 날짜별 가계부 읽기 - 금액, 카테고리, 날짜, 내역
+        Map<String, Integer> date = new HashMap<>();
+        date.put("userId", userId);
+        date.put("year", year);
+        date.put("month", month);
+        date.put("day", day);
+
+        return accountBookRepository.readDayAccountBook(date);
+    }
+
+    @Override
+    public AccountBookResponseDto readAccountBook(int userId, int id) {
+        // 가계부 읽기 - 금액, 카테고리, 날짜, 내역 및 메모
+        Map<String, Integer> account = new HashMap<>();
+        account.put("userId", userId);
+        account.put("id", id);
+
+        return accountBookRepository.readAccountBook(account);
     }
 }

@@ -54,4 +54,16 @@
         </choose>
         WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
     </update>
+
+    <select id="readDay" parameterType="hashMap" resultType="com.finance.budget.dto.AccountBookResponseDto">
+        SELECT id, content, amount, memo, `date`, category_id, user_id
+        FROM account_book
+        WHERE user_id = #{userId} AND YEAR(`date`) = #{year} AND MONTH(`date`) = #{month} AND DAY(`date`) = #{day}
+    </select>
+
+    <select id="read" parameterType="hashMap" resultType="com.finance.budget.dto.AccountBookResponseDto">
+        SELECT id, content, amount, memo, `date`, category_id, user_id
+        FROM account_book
+        WHERE user_id = #{userId} AND id = #{id}
+    </select>
 </mapper>
