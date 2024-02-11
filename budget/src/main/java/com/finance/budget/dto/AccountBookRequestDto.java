@@ -15,6 +15,6 @@ public class AccountBookRequestDto {
     private String memo; // 메모
     private Timestamp date; // 사용(입력) 날짜
     private int categoryId; // category Small id (fk)
-    private String categoryType;
+    private String categoryType; // 수입, 저금, 지출 구분
     private int userId; // user id (fk)
 }

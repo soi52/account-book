@@ -2,6 +2,7 @@ package com.finance.budget.controller;
 
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
+import com.finance.budget.dto.AccountBookUpdateRequestDto;
 import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.service.AccountBookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -60,6 +61,14 @@ public class AccountBookController {
         return accountBookService.readAccountBook(userId, id);
     }
 
-//    @Operation(summary = "가계부 수정", description = "가계부 수정하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모 -> 월별, 카테고리 통계 영향")
+    @Operation(summary = "가계부 수정", description = "가계부 수정하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 메모 -> 월별, 카테고리 통계 영향")
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAccountBook(@RequestBody AccountBookUpdateRequestDto accountBookUpdateRequestDto) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        accountBookService.updateAccountBook(userId, accountBookUpdateRequestDto);
+    }
+
 //    @Operation(summary = "가계부 삭제", description = "가계부 삭제하기 - id 기준으로 삭제 -> 월별, 카테고리 통계 영향")
 }

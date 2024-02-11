@@ -28,8 +28,14 @@
             <when test="type == 0">
                 total_money = total_money + #{amount}
             </when>
-            <otherwise>
+            <when test="type == 1">
                 current_money = current_money + #{amount}
+            </when>
+            <when test="type == 2">
+                total_money = total_money - #{amount}
+            </when>
+            <otherwise>
+                current_money = current_money - #{amount}
             </otherwise>
         </choose>
         WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
@@ -51,6 +57,12 @@
             <when test="type == 1">
                 current_money = current_money + #{amount}
             </when>
+            <when test="type == 2">
+                total_money = total_money - #{amount}
+            </when>
+            <otherwise>
+                current_money = current_money - #{amount}
+            </otherwise>
         </choose>
         WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
     </update>
@@ -66,4 +78,20 @@
         FROM account_book
         WHERE user_id = #{userId} AND id = #{id}
     </select>
+
+    <select id="searchCategory" parameterType="int" resultType="String">
+        SELECT `type`
+        FROM category_big
+        WHERE id = (
+                SELECT category_id
+                FROM category_small
+                WHERE id = #{categoryId}
+            )
+    </select>
+
+    <insert id="update" parameterType="com.finance.budget.dto.AccountBookUpdateRequestDto">
+        UPDATE account_book
+        SET content = #{content}, amount = #{amount}, memo = #{memo}, `date` = #{date}, category_id = #{categoryId}
+        WHERE id = #{id}
+    </insert>
 </mapper>
