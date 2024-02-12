@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'ChangwonDangamAsac';
+    src: url('../fonts/ChangwonDangamAsac-Bold_0712.ttf');
+}
+
+body {
+    font-family: 'ChangwonDangamAsac';
+}
+
+.login-background {
+    /* 화면 전체 높이 */
+    height: 100vh;
+    /* 배경 이미지 */
+    background-image: url('../image/backgroundHands.png');
+    /* 배경 이미지가 컨테이너를 꽉 채우도록 설정 */
+    background-size: cover;
+    /* 이미지 중앙 정렬 */
+    background-position: center;
+}
+
+.login-handOk {
+    position: absolute;
+    width: 90px;
+    height: 192px;
+    left: 71px;
+    top: 209px;
+}
+
+.login-title {
+    /* 가계부 글씨 */
+    position: absolute;
+    width: 89px;
+    height: 38px;
+    left: 184px;
+    top: 303px;
+
+    font-family: 'ChangwonDangamAsac';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+
+    color: #000000;
+}
+
+.login-kakao {
+    /* kakao_login_medium_narrow 1 */
+    position: absolute;
+    width: 183px;
+    height: 45px;
+    left: 93px;
+    top: 447px;
+}
