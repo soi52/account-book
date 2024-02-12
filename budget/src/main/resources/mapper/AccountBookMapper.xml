@@ -79,6 +79,12 @@
         WHERE user_id = #{userId} AND id = #{id}
     </select>
 
+    <select id="readStatis" parameterType="hashMap" resultType="com.finance.budget.dto.AccountBookRequestDto">
+        SELECT id, content, amount, memo, `date`, category_id, user_id
+        FROM account_book
+        WHERE user_id = #{userId} AND id = #{id}
+    </select>
+
     <select id="searchCategory" parameterType="int" resultType="String">
         SELECT `type`
         FROM category_big
@@ -89,9 +95,14 @@
             )
     </select>
 
-    <insert id="update" parameterType="com.finance.budget.dto.AccountBookUpdateRequestDto">
+    <update id="update" parameterType="com.finance.budget.dto.AccountBookRequestDto">
         UPDATE account_book
         SET content = #{content}, amount = #{amount}, memo = #{memo}, `date` = #{date}, category_id = #{categoryId}
         WHERE id = #{id}
-    </insert>
+    </update>
+
+    <delete id="delete" parameterType="hashMap">
+        DELETE FROM account_book
+        WHERE user_id = #{userId} AND id = #{id}
+    </delete>
 </mapper>

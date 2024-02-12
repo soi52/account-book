@@ -45,11 +45,19 @@ public class AccountBookRepository {
         return sql.selectOne("AccountBook.read", account);
     }
 
+    public AccountBookRequestDto readStatisAccountBook(Map<String, Integer> account) {
+        return sql.selectOne("AccountBook.readStatis", account);
+    }
+
     public String searchCategory(int categoryId) {
         return sql.selectOne("AccountBook.searchCategory", categoryId);
     }
 
     public int updateAccountBook(AccountBookRequestDto accountBookUpdateRequestDto) {
         return sql.update("AccountBook.update", accountBookUpdateRequestDto);
+    }
+
+    public int deleteAccountBook(Map<String, Integer> account) {
+        return sql.delete("AccountBook.delete", account);
     }
 }

@@ -18,4 +18,6 @@ public interface AccountBookService {
     AccountBookResponseDto readAccountBook(int userId, int id);
 
     void updateAccountBook(int userId, AccountBookRequestDto accountBookUpdateRequestDto);
+
+    void deleteAccountBook(int userId, int id);
 }

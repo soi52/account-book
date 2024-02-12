@@ -87,17 +87,17 @@ public class AccountBookServiceImpl implements AccountBookService {
         accountBookUpdateRequestDto.setUserId(userId);
 
         // # 기존 내역 되돌리기 # //
+
+        // 통계 변경을 위한 값 설정
         Map<String, Integer> account = new HashMap<>();
         account.put("userId", userId);
         account.put("id", accountBookUpdateRequestDto.getId());
-
-        // 통계 변경을 위한 값 설정
-        AccountBookResponseDto originAccountBookDto1 = accountBookRepository.readAccountBook(account);
-        String category = accountBookRepository.searchCategory(originAccountBookDto1.getCategoryId());   // 소카테고리로 대카테고리 찾기
-        AccountBookRequestDto originAccountBookDto2 = new AccountBookRequestDto(originAccountBookDto1.getId(), originAccountBookDto1.getContent(),
-                originAccountBookDto1.getAmount(), originAccountBookDto1.getMemo(), originAccountBookDto1.getDate(), originAccountBookDto1.getCategoryId(),
-                category, originAccountBookDto1.getUserId());
-        Map<String, Integer> statis = statisMap(2, originAccountBookDto2);  // 통계를 위한 데이터
+        
+        AccountBookRequestDto originAccountBookDto = accountBookRepository.readStatisAccountBook(account);  // 기존 가계부 데이터 가져오기
+        String category = accountBookRepository.searchCategory(originAccountBookDto.getCategoryId());   // 소카테고리로 대카테고리 찾기
+        originAccountBookDto.setCategoryType(category);
+        
+        Map<String, Integer> statis = statisMap(2, originAccountBookDto);  // 통계를 위한 데이터
 
         // 수정된 가계부로 인하여 카테고리 별 통계에 영향
         int check = accountBookRepository.updateCategory(statis);
@@ -128,6 +128,38 @@ public class AccountBookServiceImpl implements AccountBookService {
         check = accountBookRepository.updateMonth(statis);
         if (check == 0)
             throw new writeAccountBookException("가계부 수정 후 월별 통계 변경 중 오류 발생");
+    }
+
+    @Override
+    public void deleteAccountBook(int userId, int id) {
+        // 가계부 삭제하기 - id 기준으로 삭제 -> 월별, 카테고리 통계 영향
+        
+        // 통계 변경을 위한 값 설정
+        Map<String, Integer> account = new HashMap<>();
+        account.put("userId", userId);
+        account.put("id", id);
+
+        AccountBookRequestDto originAccountBookDto = accountBookRepository.readStatisAccountBook(account);  // 기존 가계부 데이터 가져오기
+        String category = accountBookRepository.searchCategory(originAccountBookDto.getCategoryId());   // 소카테고리로 대카테고리 찾기
+        originAccountBookDto.setCategoryType(category);
+
+        Map<String, Integer> statis = statisMap(2, originAccountBookDto);  // 통계를 위한 데이터
+        
+        // 수정된 가계부로 인하여 카테고리 별 통계에 영향
+        int check = accountBookRepository.updateCategory(statis);
+        if (check == 0)
+            throw new writeAccountBookException("가계부 삭제 (기존 값 복원) 중 카테고리 통계 변경 오류 발생");
+
+        // 수정된 가계부로 인하여 월 별 통계에 영향
+        check = accountBookRepository.updateMonth(statis);
+        if (check == 0)
+            throw new writeAccountBookException("가계부 삭제 (기존 값 복원) 중 월별 통계 변경 오류 발생");
+
+        // # 가계부 삭제하기 # //
+        // TODO : 추후 삭제 여부 열 추가하여 판별하기
+        check = accountBookRepository.deleteAccountBook(account);
+        if (check == 0)
+            throw new writeAccountBookException("가계부 삭제 중 오류 발생");
     }
 
     private Map<String, Integer> statisMap(int flag, AccountBookRequestDto accountBookRequestDto) {

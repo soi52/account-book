@@ -69,5 +69,12 @@ public class AccountBookController {
         accountBookService.updateAccountBook(userId, accountBookUpdateRequestDto);
     }
 
-//    @Operation(summary = "가계부 삭제", description = "가계부 삭제하기 - id 기준으로 삭제 -> 월별, 카테고리 통계 영향")
+    @Operation(summary = "가계부 삭제", description = "가계부 삭제하기 - id 기준으로 삭제 -> 월별, 카테고리 통계 영향")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAccountBook(@PathVariable("id") int id) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        accountBookService.deleteAccountBook(userId, id);
+    }
 }
