@@ -3,10 +3,6 @@
     src: url('../fonts/ChangwonDangamAsac-Bold_0712.ttf');
 }
 
-body {
-    font-family: 'ChangwonDangamAsac';
-}
-
 .login-background {
     /* 화면 전체 높이 */
     height: 100vh;
