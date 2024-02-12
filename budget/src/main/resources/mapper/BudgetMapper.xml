@@ -17,6 +17,11 @@
         </foreach>
     </insert>
 
+    <insert id="writeMonth" parameterType="com.finance.budget.dto.BudgetRequestDto">
+        INSERT INTO month_money (`current_date`, user_id)
+        VALUES (#{currentDate}, #{userId})
+    </insert>
+
     <select id="read" parameterType="hashMap" resultType="com.finance.budget.dto.BudgetResponseDto">
         SELECT mc.id, user_id, category_id, current_money, total_money, `current_date`
         FROM month_category_money as mc

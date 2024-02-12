@@ -14,4 +14,9 @@ public class ExceptionHandlerAdvice {
         return new ErrorDto(e.getClass().getName(), e.getMessage());
     }
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(writeAccountBookException.class)
+    public ErrorDto writeAccountBookException(Exception e) {
+        return new ErrorDto(e.getClass().getName(), e.getMessage());
+    }
 }
