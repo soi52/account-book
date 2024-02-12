@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 public class AccountBookRequestDto {
+    private int id; // 식별자
     private String content; // 사용 내역
     private int amount; // 사용 금액
     private String memo; // 메모

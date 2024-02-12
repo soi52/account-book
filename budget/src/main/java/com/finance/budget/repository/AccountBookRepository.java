@@ -2,7 +2,6 @@ package com.finance.budget.repository;
 
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
-import com.finance.budget.dto.AccountBookUpdateRequestDto;
 import com.finance.budget.dto.CategoryResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,7 +49,7 @@ public class AccountBookRepository {
         return sql.selectOne("AccountBook.searchCategory", categoryId);
     }
 
-    public int updateAccountBook(AccountBookUpdateRequestDto accountBookUpdateRequestDto) {
+    public int updateAccountBook(AccountBookRequestDto accountBookUpdateRequestDto) {
         return sql.update("AccountBook.update", accountBookUpdateRequestDto);
     }
 }

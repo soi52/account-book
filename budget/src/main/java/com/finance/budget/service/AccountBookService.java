@@ -2,7 +2,6 @@ package com.finance.budget.service;
 
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
-import com.finance.budget.dto.AccountBookUpdateRequestDto;
 import com.finance.budget.dto.CategoryResponseDto;
 
 import java.util.List;
@@ -18,5 +17,5 @@ public interface AccountBookService {
 
     AccountBookResponseDto readAccountBook(int userId, int id);
 
-    void updateAccountBook(int userId, AccountBookUpdateRequestDto accountBookUpdateRequestDto);
+    void updateAccountBook(int userId, AccountBookRequestDto accountBookUpdateRequestDto);
 }
