@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'InterRegular';
+    src: url('../fonts/Inter-Regular.ttf');
+}
+
+body {
+    font-family: 'InterRegular';
+}
+
+.AppMain {
+    margin-top: 45px;
+    margin-bottom: 20px;
+}
