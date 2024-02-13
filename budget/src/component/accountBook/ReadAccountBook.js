@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const ReadAccountBook = () => {
     // 전달 인자
     const { state } = useLocation();
-    const navigate = useNavigate();
 
     // 식별자
     const [detailId, setDetailId] = useState(''); // 사용처
@@ -36,6 +35,8 @@ const ReadAccountBook = () => {
         return `${dateString} ${dayName}`;
     }
 
+    const handleDelete = () => {};
+
     useEffect(() => {
         // .get(`account/${state.accountBookId}`)
         axios_api
@@ -61,7 +62,10 @@ const ReadAccountBook = () => {
                 <p className="m-1 text-left">💠 사용처 :</p>
                 <p className="p-1 m-0.5 rounded-lg">{content}</p>
                 <p className="m-1 text-left">🔹 금액 :</p>
-                <p className="p-1 m-0.5 rounded-lg">{amount} 원</p>
+                <p className="p-1 m-0.5 rounded-lg">
+                    <span>{amount}</span>
+                    <span className="mx-1">원</span>
+                </p>
                 <p className="m-1 text-left">🔸 메모 :</p>
                 <p className="p-1 m-0.5 rounded-lg">{memo}</p>
             </div>
@@ -74,10 +78,15 @@ const ReadAccountBook = () => {
                 <p className="p-1 m-0.5 rounded-lg">{selectDate}</p>
             </div>
             <div className="mt-4">
-                <span className="p-1 mx-2 font-semibold bg-blue-100 border-2 border-blue-400 rounded-md cursor-default hover:bg-blue-500">
-                    수정하기
-                </span>
-                <span className="p-1 mx-2 font-semibold bg-red-100 border-2 border-red-400 rounded-md cursor-default hover:bg-red-500">
+                <Link to="/update" state={{ detailId: detailId }}>
+                    <span className="p-1 mx-2 font-semibold bg-blue-100 border-2 border-blue-400 rounded-md cursor-default hover:bg-blue-500">
+                        수정하기
+                    </span>
+                </Link>
+                <span
+                    className="p-1 mx-2 font-semibold bg-red-100 border-2 border-red-400 rounded-md cursor-default hover:bg-red-500"
+                    onClick={handleDelete}
+                >
                     삭제하기
                 </span>
             </div>

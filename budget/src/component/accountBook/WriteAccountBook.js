@@ -112,28 +112,31 @@ const WriteAccountBook = () => {
                     type="text"
                     maxLength="10"
                     id="usage"
-                    className="p-1 m-0.5 rounded-lg"
+                    className="p-1 px-2 m-0.5 rounded-lg"
                     placeholder="사용하신 용도를 적어주세요"
                     onChange={(event) => {
                         setContent(event.target.value);
                     }}
                 ></input>
                 <p className="m-1 text-left">🔹 금액</p>
-                <input
-                    type="number"
-                    id="amount"
-                    className="p-1 m-0.5 rounded-lg"
-                    placeholder="사용하신 금액을 적어주세요"
-                    onChange={(event) => {
-                        setAmount(event.target.value);
-                    }}
-                ></input>
-                원<p className="m-1 text-left">🔸 메모</p>
+                <div>
+                    <input
+                        type="number"
+                        id="amount"
+                        className="p-1 m-0.5 rounded-lg"
+                        placeholder="사용하신 금액을 적어주세요"
+                        onChange={(event) => {
+                            setAmount(event.target.value);
+                        }}
+                    ></input>
+                    <span className="mx-1">원</span>
+                </div>
+                <p className="m-1 text-left">🔸 메모</p>
                 <input
                     type="text"
                     maxLength="15"
                     id="memo"
-                    className="p-1 m-0.5 rounded-lg"
+                    className="p-1 px-2 m-0.5 rounded-lg"
                     placeholder="추가할 메모를 적어주세요"
                     onChange={(event) => {
                         setMemo(event.target.value);
