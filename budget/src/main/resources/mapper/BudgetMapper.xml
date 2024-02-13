@@ -9,6 +9,11 @@
         WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND MONTH(`current_date`) = #{month}
     </select>
 
+    <select id="readCategory" resultType="com.finance.budget.dto.CategoryResponseDto">
+        SELECT id, content, type
+        FROM category_big
+    </select>
+
     <insert id="write" parameterType="java.util.List">
         INSERT INTO month_category_money (total_money, `current_date`, user_id, category_id)
         VALUES
@@ -23,7 +28,7 @@
     </insert>
 
     <select id="read" parameterType="hashMap" resultType="com.finance.budget.dto.BudgetResponseDto">
-        SELECT mc.id, user_id, category_id, current_money, total_money, `current_date`
+        SELECT mc.id, user_id, category_id, content, current_money, total_money, `current_date`
         FROM month_category_money as mc
             LEFT JOIN category_big as cb
                 ON mc.category_id = cb.id

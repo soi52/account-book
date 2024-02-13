@@ -81,6 +81,16 @@
         WHERE user_id = #{userId} AND YEAR(`date`) = #{year} AND MONTH(`date`) = #{month} AND DAY(`date`) = #{day}
     </select>
 
+    <select id="readCategory" parameterType="hashMap" resultType="com.finance.budget.dto.AccountBookResponseDto">
+        SELECT ab.id, ab.content, amount, memo, `date`, ab.category_id, ab.user_id
+        FROM account_book ab
+                 LEFT JOIN category_small cs ON cs.id = ab.category_id
+        WHERE ab.user_id = #{userId}
+          AND YEAR(`date`) = #{year}
+          AND MONTH(`date`) = #{month}
+          AND cs.category_id = #{id}
+    </select>
+
     <select id="read" parameterType="hashMap" resultType="com.finance.budget.dto.AccountBookResponseDto">
         SELECT id, content, amount, memo, `date`, category_id, user_id
         FROM account_book
@@ -113,4 +123,10 @@
         DELETE FROM account_book
         WHERE user_id = #{userId} AND id = #{id}
     </delete>
+
+    <select id="readMonth" parameterType="hashMap" resultType="com.finance.budget.dto.MonthResponseDto">
+        SELECT id, current_money, total_money, `current_date`
+        FROM month_money
+        WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND month(`current_date`) = #{month}
+    </select>
 </mapper>
