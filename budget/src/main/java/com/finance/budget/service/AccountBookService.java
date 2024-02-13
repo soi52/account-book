@@ -11,6 +11,8 @@ public interface AccountBookService {
 
     List<CategoryResponseDto> readCategorySmall(String cateBig);
 
+    CategoryResponseDto readCategory(int id);
+
     void writeAccountBook(int userId, AccountBookRequestDto accountBookRequestDto);
 
     List<AccountBookResponseDto> readDayAccountBook(int userId, int year, int month, int day);

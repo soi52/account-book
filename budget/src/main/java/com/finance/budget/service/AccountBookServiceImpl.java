@@ -36,6 +36,11 @@ public class AccountBookServiceImpl implements AccountBookService {
     }
 
     @Override
+    public CategoryResponseDto readCategory(int id) {
+        return accountBookRepository.readCategory(id);
+    }
+
+    @Override
     public void writeAccountBook(int userId, AccountBookRequestDto accountBookRequestDto) {
         // 가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 내역 및 메모 -> 월별, 카테고리 통계 영향
         accountBookRequestDto.setUserId(userId);
