@@ -3,6 +3,7 @@ package com.finance.budget.controller;
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
+import com.finance.budget.dto.MonthResponseDto;
 import com.finance.budget.service.AccountBookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -83,5 +84,14 @@ public class AccountBookController {
         // TODO : userId 추후 카카오 로그인 추가하기
         int userId = 1; // 임시 사용자
         accountBookService.deleteAccountBook(userId, id);
+    }
+
+    @Operation(summary = "월 별 사용량 조회", description = "월 별 수입 및 지출 통계 보기")
+    @GetMapping("/{year}/{month}")
+    @ResponseStatus(HttpStatus.OK)
+    public MonthResponseDto readMonthStatis(@PathVariable("year") int year, @PathVariable("month") int month) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        return accountBookService.readMonthStatis(userId, year, month);
     }
 }

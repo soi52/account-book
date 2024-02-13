@@ -3,6 +3,7 @@ package com.finance.budget.service;
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
+import com.finance.budget.dto.MonthResponseDto;
 import com.finance.budget.exception.writeAccountBookException;
 import com.finance.budget.repository.AccountBookRepository;
 import lombok.RequiredArgsConstructor;
@@ -165,6 +166,17 @@ public class AccountBookServiceImpl implements AccountBookService {
         check = accountBookRepository.deleteAccountBook(account);
         if (check == 0)
             throw new writeAccountBookException("가계부 삭제 중 오류 발생");
+    }
+
+    @Override
+    public MonthResponseDto readMonthStatis(int userId, int year, int month) {
+        // 월 별 사용량 조회 - 월 별 수입 및 지출 통계 보기
+        Map<String, Integer> date = new HashMap<>();
+        date.put("userId", userId);
+        date.put("year", year);
+        date.put("month", month);
+
+        return accountBookRepository.readMonthStatis(date);
     }
 
     private Map<String, Integer> statisMap(int flag, AccountBookRequestDto accountBookRequestDto) {

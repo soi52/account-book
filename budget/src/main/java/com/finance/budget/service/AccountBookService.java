@@ -3,6 +3,7 @@ package com.finance.budget.service;
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
+import com.finance.budget.dto.MonthResponseDto;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface AccountBookService {
     void updateAccountBook(int userId, AccountBookRequestDto accountBookUpdateRequestDto);
 
     void deleteAccountBook(int userId, int id);
+
+    MonthResponseDto readMonthStatis(int userId, int year, int month);
 }

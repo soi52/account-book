@@ -3,6 +3,7 @@ package com.finance.budget.repository;
 import com.finance.budget.dto.AccountBookRequestDto;
 import com.finance.budget.dto.AccountBookResponseDto;
 import com.finance.budget.dto.CategoryResponseDto;
+import com.finance.budget.dto.MonthResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -63,5 +64,9 @@ public class AccountBookRepository {
 
     public int deleteAccountBook(Map<String, Integer> account) {
         return sql.delete("AccountBook.delete", account);
+    }
+
+    public MonthResponseDto readMonthStatis(Map<String, Integer> date) {
+        return sql.selectOne("AccountBook.readMonth", date);
     }
 }

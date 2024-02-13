@@ -113,4 +113,10 @@
         DELETE FROM account_book
         WHERE user_id = #{userId} AND id = #{id}
     </delete>
+
+    <select id="readMonth" parameterType="hashMap" resultType="com.finance.budget.dto.MonthResponseDto">
+        SELECT id, current_money, total_money, `current_date`
+        FROM month_money
+        WHERE user_id = #{userId} AND YEAR(`current_date`) = #{year} AND month(`current_date`) = #{month}
+    </select>
 </mapper>
