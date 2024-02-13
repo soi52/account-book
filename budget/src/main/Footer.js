@@ -39,7 +39,7 @@ const Footer = () => {
                         alt="iconMonth"
                     ></img>
                 </Link>
-                <Link>
+                <Link to={'/budget'}>
                     <img
                         className="w-auto h-10"
                         src={iconPlan}

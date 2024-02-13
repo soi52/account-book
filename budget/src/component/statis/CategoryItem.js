@@ -5,7 +5,6 @@ import '../../assets/css/progressBar.css';
 import image1 from '../../assets/image/iconImage1.png';
 
 const CategoryItem = ({ item }) => {
-    console.log(item);
     return (
         <div className="flex justify-between mx-2 bg-[#E5F1FF] my-3 rounded-lg p-2">
             <div className="flex items-center w-16 h-16 my-3 rounded-full bg-slate-200">

@@ -190,7 +190,7 @@ const WriteAccountBook = () => {
             </div>
             <div>
                 <span
-                    className="p-1 mx-2 border border-black rounded-md cursor-default hover:bg-green-400"
+                    className="p-1 mx-2 font-semibold bg-blue-100 border-2 border-blue-400 rounded-md cursor-default hover:bg-blue-500"
                     onClick={() => checkValue()}
                 >
                     작성하기
