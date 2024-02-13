@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
 
 const WriteAccountBook = () => {
+    // 전달 인자
+    const navigate = useNavigate();
+
     // 사용 내역
     const [content, setContent] = useState(); // 사용처
     const [amount, setAmount] = useState(); // 금액
@@ -80,7 +84,11 @@ const WriteAccountBook = () => {
                 categoryType: categoryBig[selectCateBig],
                 ...(memo !== null && { memo: memo }),
             })
-            .then(() => {})
+            .then(() => {
+                navigate(`/calender`, {
+                    replace: true,
+                });
+            })
             .catch(({ error }) => {
                 console.log('가계부 작성 중 오류 : ' + error);
             });
