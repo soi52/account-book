@@ -6,6 +6,7 @@ import ReadAccountBook from '../component/accountBook/ReadAccountBook';
 import UpdateAccountBook from '../component/accountBook/UpdateAccountBook';
 import WriteBudget from '../component/budget/WriteBudget';
 import Category from '../component/statis/Category';
+import CategoryDetail from '../component/statis/CategoryDetail';
 import Calender from '../component/statis/Calender';
 import '../assets/css/main.css';
 
@@ -20,6 +21,10 @@ const Main = () => {
                 <Route path="/update" element={<UpdateAccountBook />}></Route>
                 <Route path="/budget" element={<WriteBudget />}></Route>
                 <Route path="/category" element={<Category />}></Route>
+                <Route
+                    path="/category/detail"
+                    element={<CategoryDetail />}
+                ></Route>
                 <Route path="/calender" element={<Calender />}></Route>
             </Routes>
         </div>

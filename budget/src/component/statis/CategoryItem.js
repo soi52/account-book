@@ -11,8 +11,8 @@ const CategoryItem = ({ item }) => {
                 <img src={image1} alt="icon" />
             </div>
             <Link
-                to={`/read`}
-                state={{ accountDetailId: item.id }}
+                to={`/category/detail`}
+                state={{ categoryId: item.id, categoryType: item.content }}
                 className="w-64 mt-3"
             >
                 <p className="text-left w-44">{item.content}</p>
