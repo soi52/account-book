@@ -1956,6 +1956,13 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@tomickigrzegorz/react-circular-progress-bar@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/@tomickigrzegorz/react-circular-progress-bar/-/react-circular-progress-bar-1.1.2.tgz"
+  integrity sha512-GECg3VjJ/YZZd2XJXzDNxpHSa7nZ41hb1iX9AUUtgSbRgAAMk+eA805JD1UEyziHJ6f7kCwgGpaqTWDl32VtoQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
@@ -7943,7 +7950,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8038,6 +8045,14 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-circle-progress-bar@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.npmjs.org/react-circle-progress-bar/-/react-circle-progress-bar-0.1.4.tgz"
+  integrity sha512-2a47TDthNyUHJf8p1hv0wcTwIWnJBbEUfj/7dZcO+7BYd1W1sRC2t5x+SEWX9/1QT7hhf4t8ppcLaG0XrdwwgQ==
+  dependencies:
+    react "^16.8.6"
+    react-dom "^16.8.6"
+
 react-datepicker@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/react-datepicker/-/react-datepicker-6.1.0.tgz"
@@ -8093,6 +8108,16 @@ react-device-detect@^2.2.3:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-dom@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
 
 react-error-overlay@^6.0.11:
   version "6.0.11"
@@ -8200,6 +8225,15 @@ react-scripts@5.0.1:
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
+
+react@^16.14.0, react@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 read-cache@^1.0.0:
   version "1.0.0"
@@ -8514,6 +8548,14 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.19.1.tgz"
+  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.23.0:
   version "0.23.0"
