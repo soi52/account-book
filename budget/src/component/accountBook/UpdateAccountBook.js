@@ -157,7 +157,7 @@ const UpdateAccountBook = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-center">가계부 작성</h1>
+            <h1 className="text-2xl font-bold text-center">가계부 수정</h1>
             <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
                 <p className="m-1 font-semibold text-left">✨ 사용 내역 ✨</p>
                 <p className="m-1 text-left">💠 사용처</p>
