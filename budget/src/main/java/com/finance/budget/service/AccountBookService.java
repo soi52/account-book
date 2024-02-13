@@ -18,6 +18,8 @@ public interface AccountBookService {
 
     List<AccountBookResponseDto> readDayAccountBook(int userId, int year, int month, int day);
 
+    List<AccountBookResponseDto> readCategoryAccountBook(int userId, int id, int year, int month);
+
     AccountBookResponseDto readAccountBook(int userId, int id);
 
     void updateAccountBook(int userId, AccountBookRequestDto accountBookUpdateRequestDto);

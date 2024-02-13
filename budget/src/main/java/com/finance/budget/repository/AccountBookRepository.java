@@ -46,6 +46,10 @@ public class AccountBookRepository {
         return sql.selectList("AccountBook.readDay", date);
     }
 
+    public List<AccountBookResponseDto> readCategoryAccountBook(Map<String, Integer> category) {
+        return sql.selectList("AccountBook.readCategory", category);
+    }
+
     public AccountBookResponseDto readAccountBook(Map<String, Integer> account) {
         return sql.selectOne("AccountBook.read", account);
     }

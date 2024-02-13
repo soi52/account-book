@@ -78,6 +78,18 @@ public class AccountBookServiceImpl implements AccountBookService {
     }
 
     @Override
+    public List<AccountBookResponseDto> readCategoryAccountBook(int userId, int id, int year, int month) {
+        // 카테고리 별 가계부 읽기 - 금액, 카테고리, 날짜, 내역
+        Map<String, Integer> category = new HashMap<>();
+        category.put("userId", userId);
+        category.put("id", id);
+        category.put("year", year);
+        category.put("month", month);
+
+        return accountBookRepository.readCategoryAccountBook(category);
+    }
+
+    @Override
     public AccountBookResponseDto readAccountBook(int userId, int id) {
         // 가계부 읽기 - 금액, 카테고리, 날짜, 내역 및 메모
         Map<String, Integer> account = new HashMap<>();

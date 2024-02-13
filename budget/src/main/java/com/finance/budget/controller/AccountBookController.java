@@ -59,6 +59,15 @@ public class AccountBookController {
         return accountBookService.readDayAccountBook(userId, year, month, day);
     }
 
+    @Operation(summary = "카테고리 별 가계부 읽기", description = "가계부 읽기 - 금액, 카테고리, 날짜, 내역")
+    @GetMapping("/category/{id}/{year}/{month}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AccountBookResponseDto> readCategoryAccountBook(@PathVariable("id") int id, @PathVariable("year") int year, @PathVariable("month") int month) {
+        // TODO : userId 추후 카카오 로그인 추가하기
+        int userId = 1; // 임시 사용자
+        return accountBookService.readCategoryAccountBook(userId, id, year, month);
+    }
+
     @Operation(summary = "가계부 읽기", description = "가계부 읽기 - 금액, 카테고리, 날짜, 내역 및 메모")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
