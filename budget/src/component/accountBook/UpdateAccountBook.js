@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const UpdateAccountBook = () => {
     const { state } = useLocation();
+    const navigate = useNavigate();
 
+    // 가계부 식별
+    const [updateId, setUpdateId] = useState(); // 식별자
     // 사용 내역
     const [content, setContent] = useState(); // 사용처
     const [amount, setAmount] = useState(); // 금액
     const [memo, setMemo] = useState(); // 메모
     // 카테고리
-    const [originCategorySmall, setOriginCategorySmall] = useState();
     const [categoryBig, setCategoryBig] = useState([]);
     const [selectCateBig, setSelectCateBig] = useState(null);
     const [categorySmall, setCategorySmall] = useState([]);
@@ -32,8 +34,6 @@ const UpdateAccountBook = () => {
             .catch(({ error }) => {
                 console.log('작은 카테고리 불러오기 오류 : ' + error);
             });
-
-        setSelectCateSmall(null);
     };
 
     // 작은 카테고리 선택 이벤트 함수
@@ -75,8 +75,10 @@ const UpdateAccountBook = () => {
     };
 
     const handleSubmit = () => {
+        // 가계부 수정하기
         axios_api
-            .post('account', {
+            .put('account', {
+                id: updateId,
                 content: content,
                 amount: amount,
                 date: selectDate,
@@ -84,13 +86,33 @@ const UpdateAccountBook = () => {
                 categoryType: categoryBig[selectCateBig],
                 ...(memo !== null && { memo: memo }),
             })
-            .then(() => {})
+            .then((response) => {
+                navigate(`/read`, {
+                    state: { accountDetailId: updateId },
+                    // replace: true,
+                });
+            })
             .catch(({ error }) => {
-                console.log('가계부 작성 중 오류 : ' + error);
+                console.log('가계부 수정 중 오류 : ' + error);
             });
     };
 
     useEffect(() => {
+        setUpdateId(state.detailId);
+
+        // 큰 카테고리 불러오기
+        axios_api
+            .get('account/categoryBig')
+            .then(({ data }) => {
+                setCategoryBig(data);
+            })
+            .catch(({ error }) => {
+                console.log('큰 카테고리 불러오기 오류 : ' + error);
+            });
+
+        let originCategoryId = 0,
+            index = 0;
+
         // 기존 값 불러오기
         axios_api
             .get(`account/${state.detailId}`)
@@ -98,25 +120,38 @@ const UpdateAccountBook = () => {
                 setContent(data.content);
                 setAmount(data.amount);
                 setMemo(data.memo);
-                setOriginCategorySmall(data.categoryId);
                 setSelectDate(formatDate(data.date));
+
+                originCategoryId = data.categoryId;
+
+                axios_api
+                    .get(`account/category/${originCategoryId}`)
+                    .then(({ data }) => {
+                        if (data.type === '수입') index = 0;
+                        else if (data.type === '저금') index = 1;
+                        else index = 2;
+
+                        setSelectCateBig(index);
+
+                        setSelectCateSmall(originCategoryId);
+                    })
+                    .catch(({ error }) => {
+                        console.log('기존 카테고리 보기 오류 : ' + error);
+                    });
             })
             .catch(({ error }) => {
                 console.log('가계부 상세 보기 오류 : ' + error);
             });
 
-        // 큰 카테고리 불러오기
+        // 작은 카테고리 불러오기
         axios_api
-            .get('account/categoryBig')
-            // .then((response) => {
-            //     console.log(response.data);
-            //     console.log(response.status);
-            // })
+            .get(`account/categorySmall?cateBig=${categoryBig[index]}`)
             .then(({ data }) => {
-                setCategoryBig(data);
+                setCategorySmall(data);
+                setSelectCateSmall(originCategoryId);
             })
             .catch(({ error }) => {
-                console.log('큰 카테고리 불러오기 오류 : ' + error);
+                console.log('작은 카테고리 불러오기 오류 : ' + error);
             });
     }, []);
 
@@ -203,7 +238,7 @@ const UpdateAccountBook = () => {
                     className="p-1 mx-2 border border-black rounded-md cursor-default hover:bg-green-400"
                     onClick={() => checkValue()}
                 >
-                    작성하기
+                    수정하기
                 </span>
             </div>
         </div>

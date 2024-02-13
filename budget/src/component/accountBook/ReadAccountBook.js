@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios_api from '../../config/Axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const ReadAccountBook = () => {
     // 전달 인자
     const { state } = useLocation();
+    const navigate = useNavigate();
 
     // 식별자
     const [detailId, setDetailId] = useState(''); // 사용처
@@ -35,7 +36,19 @@ const ReadAccountBook = () => {
         return `${dateString} ${dayName}`;
     }
 
-    const handleDelete = () => {};
+    const handleDelete = () => {
+        // 작성된 가계부 삭제 함수
+        axios_api
+            .delete(`account/${detailId}`)
+            .then(() => {
+                navigate(`/calender`, {
+                    replace: true,
+                });
+            })
+            .catch(({ error }) => {
+                console.log('가계부 수정 중 오류 : ' + error);
+            });
+    };
 
     useEffect(() => {
         // .get(`account/${state.accountBookId}`)
@@ -46,8 +59,16 @@ const ReadAccountBook = () => {
                 setContent(data.content);
                 setAmount(data.amount);
                 setMemo(data.memo);
-                setCategorySmall(data.categoryId);
                 setSelectDate(formatDate(data.date));
+
+                axios_api
+                    .get(`account/category/${data.categoryId}`)
+                    .then(({ data }) => {
+                        setCategorySmall(data.type + ' - ' + data.content);
+                    })
+                    .catch(({ error }) => {
+                        console.log('기존 카테고리 보기 오류 : ' + error);
+                    });
             })
             .catch(({ error }) => {
                 console.log('가계부 상세 보기 오류 : ' + error);
