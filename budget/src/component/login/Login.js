@@ -9,7 +9,7 @@ const Login = () => {
         <div className="login-background">
             <img className="login-handOk" src={handOk} alt="handOK"></img>
             <div className="login-title">가계부</div>
-            <Link to="/write">
+            <Link to="/home">
                 <img
                     className="login-kakao"
                     src={kakaoLogin}
