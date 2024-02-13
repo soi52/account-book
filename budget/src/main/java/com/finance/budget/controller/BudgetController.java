@@ -2,6 +2,7 @@ package com.finance.budget.controller;
 
 import com.finance.budget.dto.BudgetRequestDto;
 import com.finance.budget.dto.BudgetResponseDto;
+import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.service.BudgetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +28,13 @@ public class BudgetController {
         // TODO : userId 추후 카카오 로그인 추가하기
         int userId = 1; // 임시 사용자
         return budgetService.checkBudget(userId, year, month);
+    }
+
+    @Operation(summary = "예산 작성을 위한 '큰' 카테고리 얻기", description = "큰 카테고리 얻기")
+    @GetMapping("/category")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryResponseDto> readCategory() {
+        return budgetService.readCategory();
     }
 
     @Operation(summary = "예산 작성하기", description = "사용자의 한달 예산 작성하기, 카테고리 별로 사용 예산 금액 작성")

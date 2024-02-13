@@ -2,6 +2,7 @@ package com.finance.budget.service;
 
 import com.finance.budget.dto.BudgetRequestDto;
 import com.finance.budget.dto.BudgetResponseDto;
+import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.exception.writeBudgetException;
 import com.finance.budget.repository.BudgetRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,11 @@ public class BudgetServiceImpl implements BudgetService {
             checkWrite.put("checkBudgetWrite", false);
 
         return checkWrite;
+    }
+
+    @Override
+    public List<CategoryResponseDto> readCategory() {
+        return budgetRepository.readCategory();
     }
 
     @Override
