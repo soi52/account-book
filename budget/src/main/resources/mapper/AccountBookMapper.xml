@@ -16,6 +16,14 @@
         WHERE `type` = #{cateBig}
     </select>
 
+    <select id="category" parameterType="int" resultType="com.finance.budget.dto.CategoryResponseDto">
+        SELECT cs.id, cs.content, `type`
+        FROM category_small cs
+                 LEFT JOIN category_big cb
+                           ON cs.category_id = cb.id
+        WHERE cs.id = #{id}
+    </select>
+
     <insert id="write" parameterType="com.finance.budget.dto.AccountBookRequestDto">
         INSERT INTO account_book (content, amount, memo, `date`, category_id, user_id)
         VALUES (#{content}, #{amount}, #{memo}, #{date}, #{categoryId}, #{userId})

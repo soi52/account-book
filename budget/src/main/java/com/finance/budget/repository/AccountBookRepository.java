@@ -25,6 +25,10 @@ public class AccountBookRepository {
         return sql.selectList("AccountBook.categorySmall", cateBig);
     }
 
+    public CategoryResponseDto readCategory(int id) {
+        return sql.selectOne("AccountBook.category", id);
+    }
+
     public int writeAccountBook(AccountBookRequestDto accountBookRequestDto) {
         return sql.insert("AccountBook.write", accountBookRequestDto);
     }

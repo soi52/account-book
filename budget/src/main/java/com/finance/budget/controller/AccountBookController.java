@@ -33,6 +33,13 @@ public class AccountBookController {
         return accountBookService.readCategorySmall(cateBig);
     }
 
+    @Operation(summary = "가계부 수정을 위한 '기존' 카테고리 얻기", description = "작은 카테고리 id로 큰 카테고리 가져오기")
+    @GetMapping("/category/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryResponseDto readCategory(@PathVariable("id") int id) {
+        return accountBookService.readCategory(id);
+    }
+
     @Operation(summary = "가계부 작성", description = "가계부 작성하기 - 금액 입력, 카테고리 선택, 날짜(defalut now) 선택, 내역 및 메모 -> 월별, 카테고리 통계 영향")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
