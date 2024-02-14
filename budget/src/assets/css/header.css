@@ -41,15 +41,20 @@
     src: url('../fonts/Inter-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'InterBold';
+    src: url('../fonts/Inter-ExtraBold.ttf');
+}
+
 .header-text-2 {
     /* Money! 부자되기! */
 
     width: 100%;
     height: 22px;
 
-    font-family: 'InterRegular';
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'InterBold';
+    /* font-style: normal; */
+    font-weight: 600;
     font-size: 17px;
     line-height: 22px;
     /* identical to box height, or 129% */
@@ -57,7 +62,8 @@
     align-items: center;
 
     /* SystemGray / 01 / Light */
-    color: #8e8e93;
+    /* color: #8e8e93; */
+    color: #161414;
 
     /* Inside auto layout */
     flex: none;

@@ -18,7 +18,8 @@ const CategoryItem = ({ item }) => {
     }, []);
 
     return (
-        <div className="flex justify-between mx-2 bg-[#E5F1FF] my-3 rounded-lg p-2">
+        // <div className="flex justify-between mx-2.5 bg-[#E5F1FF] my-3 rounded-lg p-2">
+        <div className="flex justify-between mx-2.5 bg-[#e6f1fd] my-3 rounded-lg p-2">
             <div className="flex items-center w-16 h-16 my-3 rounded-full bg-slate-200">
                 <img
                     src={`assets/image/iconImage${randomNumber}.png`}
@@ -28,7 +29,7 @@ const CategoryItem = ({ item }) => {
             <Link
                 to={`/category/detail`}
                 state={{ categoryId: item.id, categoryType: item.content }}
-                className="w-64 mt-3"
+                className="w-64 mt-2"
             >
                 <p className="flex justify-between">
                     <p className="font-semibold text-left w-44">

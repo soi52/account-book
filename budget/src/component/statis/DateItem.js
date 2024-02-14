@@ -16,9 +16,10 @@ const DateItem = ({ item }) => {
     }, []);
 
     return (
-        <div className="flex justify-between my-2 ml-2 mr-3">
-            <div className="flex items-center w-16 h-16 my-1 rounded-full bg-slate-200">
+        <div className="flex justify-between px-4 py-3 my-2 ml-2 mr-3 border-2 border-indigo-300 rounded-md">
+            <div className="flex items-center w-16 my-1 overflow-hidden rounded-full h-14 bg-slate-200">
                 <img
+                    className="object-cover w-full h-full"
                     src={`../assets/image/iconImage${randomNumber}.png`}
                     alt="icon"
                 />
@@ -26,12 +27,12 @@ const DateItem = ({ item }) => {
             <Link
                 to={`/read`}
                 state={{ accountDetailId: item.id }}
-                className="my-2"
+                className="mt-1.5 ml-2.5"
             >
-                <p className="text-lg text-left w-44">{item.content}</p>
-                <p className="text-left text-gray-400">{item.memo}</p>
+                <p className="w-40 text-lg text-left">{item.content}</p>
+                <p className="pl-1 text-left text-gray-400">{item.memo}</p>
             </Link>
-            <p className="w-20 my-2 mt-3 text-right">{item.amount}원</p>
+            <p className="w-24 mt-2 text-right">{item.amount}원</p>
         </div>
     );
 };
