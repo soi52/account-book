@@ -89,7 +89,7 @@ const WriteBudget = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold text-center">한달 예산 작성</h1>
+            {/* <h1 className="text-2xl font-bold text-center">한달 예산 작성</h1> */}
             <p className="mb-2 text-sm">
                 한 달 동안 쓸 예산을 카테고리 별로 작성해주세요.
             </p>

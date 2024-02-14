@@ -160,8 +160,8 @@ const UpdateAccountBook = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold text-center">가계부 수정</h1>
-            <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
+            {/* <h1 className="text-2xl font-bold text-center">가계부 수정</h1> */}
+            <div className="box-border p-1 mx-2 mt-5 border border-teal-400 border-solid rounded-md">
                 <p className="m-1 font-semibold text-left">✨ 사용 내역 ✨</p>
                 <p className="m-1 text-left">💠 사용처</p>
                 {/* <p>onMouseOver 함수 실행 - 포커스 실행 </p> */}
@@ -169,7 +169,7 @@ const UpdateAccountBook = () => {
                     type="text"
                     maxLength="10"
                     id="usage"
-                    className="p-1 px-2  m-0.5 rounded-lg text-center"
+                    className="p-1 px-2 m-0.5 rounded-lg border text-center"
                     defaultValue={content || ''}
                     onChange={(event) => {
                         setContent(event.target.value);
@@ -179,20 +179,20 @@ const UpdateAccountBook = () => {
                 <input
                     type="number"
                     id="amount"
-                    className="p-1 px-2 m-0.5 rounded-lg text-center"
+                    className="p-1 m-0.5 w-52 rounded-lg border text-center"
                     defaultValue={amount || ''}
                     placeholder="사용하신 금액을 적어주세요"
                     onChange={(event) => {
                         setAmount(event.target.value);
                     }}
                 ></input>
-                <span>원</span>
+                <span className="ml-1">원</span>
                 <p className="m-1 text-left">🔸 메모</p>
                 <input
                     type="text"
                     maxLength="15"
                     id="memo"
-                    className="p-1 px-2  m-0.5 rounded-lg text-center"
+                    className="p-1 px-2 m-0.5 rounded-lg border text-center"
                     defaultValue={memo || ''}
                     placeholder="추가할 메모를 적어주세요"
                     onChange={(event) => {
@@ -200,40 +200,47 @@ const UpdateAccountBook = () => {
                     }}
                 ></input>
             </div>
-            <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
+            <div className="box-border -1 mx-2 my-2.5 border border-teal-400 border-solid rounded-md">
                 <p className="m-1 font-semibold text-left">✨ 카테고리 ✨</p>
-                <p className="m-1 text-left">🔹 큰 카테고리</p>
-                {categoryBig.map((string, index) => (
-                    <span
-                        key={index}
-                        onClick={() => {
-                            console.log('index', index);
-                            handleCateBigClick(index);
-                        }}
-                        className={`cursor-default p-0.5 mx-2 hover:bg-cyan-200 border-gray border-2 border-dashed rounded-md ${selectCateBig === index ? 'bg-cyan-200' : ''}`}
-                    >
-                        {string}
-                    </span> // 리스트를 순회하며 각 항목을 렌더링
-                ))}
-                <p className="m-1 text-left">🔸 작은 카테고리</p>
-                {categorySmall.map(({ content, id }) => (
-                    <span
-                        key={id}
-                        onClick={() => handleCateSmallClick(id)}
-                        className={`cursor-default p-0.5 mx-2 my-1 hover:bg-cyan-200 border-gray border-2 border-dashed rounded-md ${selectCateSmall === id ? 'bg-cyan-200' : ''}`}
-                    >
-                        {content}
-                    </span> // 리스트를 순회하며 각 항목을 렌더링
-                ))}
+                <p className="mx-1 mt-2 mb-1 text-left">🔹 큰 카테고리</p>
+                <p className="my-1">
+                    {categoryBig.map((string, index) => (
+                        <span
+                            key={index}
+                            onClick={() => {
+                                console.log('index', index);
+                                handleCateBigClick(index);
+                            }}
+                            className={`cursor-default p-1 mx-4 hover:bg-cyan-200 border-gray border-2 border-dashed rounded-md ${selectCateBig === index ? 'bg-cyan-400' : ''}`}
+                        >
+                            {string}
+                        </span> // 리스트를 순회하며 각 항목을 렌더링
+                    ))}
+                </p>
+                <p className="mx-1 mt-2 mb-1 text-left">🔸 작은 카테고리</p>
+                <p className="my-1">
+                    {categorySmall.map(({ content, id }) => (
+                        <span
+                            key={id}
+                            onClick={() => handleCateSmallClick(id)}
+                            className={`cursor-default m-2 my-10 hover:bg-cyan-200 border-gray border-2 border-dashed rounded-md ${selectCateSmall === id ? 'bg-cyan-300' : ''}`}
+                        >
+                            {content}
+                        </span> // 리스트를 순회하며 각 항목을 렌더링
+                    ))}
+                </p>
             </div>
             <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
-                <p className="m-1 font-semibold text-left">✨ 날짜 선택 ✨</p>
+                <p className="mx-1 mt-1 mb-2 font-semibold text-left">
+                    ✨ 날짜 선택 ✨
+                </p>
                 <DatePicker
                     // selected={selectDate}
                     // onChange={(date) => setSelectDate(date)}
                     selected={selectDate ? new Date(selectDate) : null}
                     onChange={handleDateChange}
                     dateFormat="yyyy년 MM월 dd일"
+                    className="p-0.5 my-1 text-center border rounded-lg"
                     maxDate={new Date()}
                     // isClearable
                     // showYearDropdown

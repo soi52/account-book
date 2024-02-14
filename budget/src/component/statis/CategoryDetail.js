@@ -43,11 +43,11 @@ const CategoryDetail = () => {
             {/* <h1 className="text-2xl font-bold text-center">
                 카테고리 별 사용 내역
             </h1> */}
-            <h1 className="text-2xl font-bold text-center">
+            <h1 className="text-xl font-bold text-center">
                 {categoryType}에 사용한 내역
             </h1>
-            <p className="mb-2 text-sm">
-                한 달 동안 쓴 카테고리 별 사용내역에요.
+            <p className="mb-2 my-0.5 text-sm">
+                한 달 동안 쓴 카테고리 별 사용 내역에요.
             </p>
             <hr className="mt-1 mb-2" />
             {accountList.map((accountItem) => (

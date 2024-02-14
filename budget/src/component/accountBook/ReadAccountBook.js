@@ -77,35 +77,49 @@ const ReadAccountBook = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold text-center">가계부 상세 보기</h1>
-            <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
-                <p className="m-1 font-semibold text-left">✨ 사용 내역 ✨</p>
+            {/* <h1 className="text-2xl font-bold text-center">가계부 상세 보기</h1> */}
+            <div className="box-border p-1 mx-2 mt-5 border border-teal-400 border-solid rounded-md">
+                <p className="mx-1 mt-1 mb-2 font-semibold text-left">
+                    ✨ 사용 내역 ✨
+                </p>
                 <p className="m-1 text-left">💠 사용처 :</p>
-                <p className="p-1 m-0.5 rounded-lg">{content}</p>
+                <p className="p-1 px-2 my-0.5 mx-10 rounded-lg border">
+                    {content}
+                </p>
                 <p className="m-1 text-left">🔹 금액 :</p>
-                <p className="p-1 m-0.5 rounded-lg">
+                <p className="p-1 px-2 my-0.5 mx-10 rounded-lg border">
                     <span>{amount}</span>
                     <span className="mx-1">원</span>
                 </p>
                 <p className="m-1 text-left">🔸 메모 :</p>
-                <p className="p-1 m-0.5 rounded-lg">{memo}</p>
+                <p className="p-1 px-2 my-0.5 mx-10 rounded-lg border">
+                    {memo}
+                </p>
+            </div>
+            <div className="box-border p-1 mx-2 my-2.5 border border-teal-400 border-solid rounded-md">
+                <p className="mx-1 mt-1 mb-2 font-semibold text-left">
+                    ✨ 카테고리 ✨
+                </p>
+                <p className="p-1 px-2 my-0.5 mx-10 rounded-lg border">
+                    {categorySmall}
+                </p>
             </div>
             <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
-                <p className="m-1 font-semibold text-left">✨ 카테고리 ✨</p>
-                <p className="p-1 m-0.5 rounded-lg">{categorySmall}</p>
-            </div>
-            <div className="box-border p-1 m-2 border border-teal-400 border-solid rounded-md">
-                <p className="m-1 font-semibold text-left">✨ 사용 날짜 ✨</p>
-                <p className="p-1 m-0.5 rounded-lg">{selectDate}</p>
+                <p className="mx-1 mt-1 mb-2 font-semibold text-left">
+                    ✨ 사용 날짜 ✨
+                </p>
+                <p className="p-1 px-2 my-0.5 mx-10 rounded-lg border">
+                    {selectDate}
+                </p>
             </div>
             <div className="mt-4">
                 <Link to="/update" state={{ detailId: detailId }}>
-                    <span className="p-1 mx-2 font-semibold bg-blue-100 border-2 border-blue-400 rounded-md cursor-default hover:bg-blue-500">
+                    <span className="p-1 mx-2 text-lg font-semibold bg-blue-100 border-2 border-blue-400 rounded-md cursor-default hover:bg-blue-500">
                         수정하기
                     </span>
                 </Link>
                 <span
-                    className="p-1 mx-2 font-semibold bg-red-100 border-2 border-red-400 rounded-md cursor-default hover:bg-red-500"
+                    className="p-1 mx-2 text-lg font-semibold bg-red-100 border-2 border-red-400 rounded-md cursor-default hover:bg-red-500"
                     onClick={handleDelete}
                 >
                     삭제하기

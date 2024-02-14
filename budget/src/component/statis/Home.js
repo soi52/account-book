@@ -28,7 +28,7 @@ const Home = () => {
 
     return (
         <div className="mt-16">
-            <div className="bg-[#007bff94] p-5 m-2 flex justify-between rounded-xl border-white">
+            <div className="bg-[#007bff94] p-5 mx-2 my-3 flex justify-between rounded-xl border-white">
                 <div>
                     <p className="m-1 text-xs text-left text-white">
                         오늘 지출을 적으셨나요?
@@ -54,12 +54,12 @@ const Home = () => {
                 <div className="flex justify-between mx-3">
                     <div className="mt-4 ">
                         <div className="p-1 my-3 border-2 rounded-md border-[#DFA0FF]">
-                            <p className="text-lg font-semibold">수입 :</p>
-                            <p className="">{totalMoney} 원</p>
+                            <p className="font-semibold">수입</p>
+                            <p className="">{totalMoney}원</p>
                         </div>
                         <div className="p-1 my-3 border rounded-md border-[#934CB7]">
-                            <p className="text-lg font-semibold">지출 : </p>
-                            <p className="">{currentMoney} 원</p>
+                            <p className="font-semibold">지출</p>
+                            <p className="">{currentMoney}원</p>
                         </div>
                     </div>
                     <CircularProgressBar

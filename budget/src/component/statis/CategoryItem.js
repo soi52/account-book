@@ -30,8 +30,15 @@ const CategoryItem = ({ item }) => {
                 state={{ categoryId: item.id, categoryType: item.content }}
                 className="w-64 mt-3"
             >
-                <p className="text-left w-44">{item.content}</p>
-                <p className="w-20 mt-0.5 text-left">{item.currentMoney}원</p>
+                <p className="flex justify-between">
+                    <p className="font-semibold text-left w-44">
+                        💠 {item.content}
+                    </p>
+                    <p className="text-rigth">{item.totalMoney}원</p>
+                </p>
+                <p className="px-1 py-0.5 mt-0.5 text-left">
+                    {item.currentMoney}원
+                </p>
                 <div className="">
                     <ProgressBar
                         completed={(item.currentMoney / item.totalMoney) * 100}

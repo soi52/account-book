@@ -27,9 +27,9 @@ const Category = () => {
     }, []);
     return (
         <div>
-            <h1 className="text-2xl font-bold text-center">
+            {/* <h1 className="text-2xl font-bold text-center">
                 카테고리 별 사용 내역
-            </h1>
+            </h1> */}
             {budgetList.map((budgetItem) => (
                 <CategoryItem
                     key={budgetItem.id}
