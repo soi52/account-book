@@ -25,15 +25,6 @@ const UpdateAccountBook = () => {
     // 큰 카테고리 선택 이벤트 함수
     const handleCateBigClick = (index) => {
         setSelectCateBig(index);
-
-        axios_api
-            .get(`account/categorySmall?cateBig=${categoryBig[index]}`)
-            .then(({ data }) => {
-                setCategorySmall(data);
-            })
-            .catch(({ error }) => {
-                console.log('작은 카테고리 불러오기 오류 : ' + error);
-            });
     };
 
     // 작은 카테고리 선택 이벤트 함수
@@ -155,6 +146,18 @@ const UpdateAccountBook = () => {
             });
     }, []);
 
+    useEffect(() => {
+        axios_api
+            .get(`account/categorySmall?cateBig=${categoryBig[selectCateBig]}`)
+            .then(({ data }) => {
+                setCategorySmall(data);
+            })
+            .catch(({ error }) => {
+                console.log('작은 카테고리 불러오기 오류 : ' + error);
+            });
+        console.log(categorySmall);
+    }, [selectCateBig]);
+
     return (
         <div>
             <h1 className="text-2xl font-bold text-center">가계부 수정</h1>
@@ -183,7 +186,8 @@ const UpdateAccountBook = () => {
                         setAmount(event.target.value);
                     }}
                 ></input>
-                원<p className="m-1 text-left">🔸 메모</p>
+                <span>원</span>
+                <p className="m-1 text-left">🔸 메모</p>
                 <input
                     type="text"
                     maxLength="15"
@@ -202,7 +206,10 @@ const UpdateAccountBook = () => {
                 {categoryBig.map((string, index) => (
                     <span
                         key={index}
-                        onClick={() => handleCateBigClick(index)}
+                        onClick={() => {
+                            console.log('index', index);
+                            handleCateBigClick(index);
+                        }}
                         className={`cursor-default p-0.5 mx-2 hover:bg-cyan-200 border-gray border-2 border-dashed rounded-md ${selectCateBig === index ? 'bg-cyan-200' : ''}`}
                     >
                         {string}
