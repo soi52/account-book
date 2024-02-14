@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios_api from '../../config/Axios.js';
 import { CircularProgressBar } from '@tomickigrzegorz/react-circular-progress-bar';
-import iconPlus from '../../assets/image/icon plus.png';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -41,7 +40,7 @@ const Home = () => {
                 {/* <div className="bg-[#007bff] filter blur-md rounded-lg m-2 my-4"></div> */}
                 <img
                     className="w-6 h-6 ml-1 mr-0.5 my-5"
-                    src={iconPlus}
+                    src="assets/image/icon plus.png"
                     alt="icon Plus"
                     onClick={() => {
                         navigate(`/write`);
@@ -54,7 +53,7 @@ const Home = () => {
                 </div>
                 <div className="flex justify-between mx-3">
                     <div className="mt-4 ">
-                        <div className="p-1 my-3 border rounded-md border-[#DFA0FF]">
+                        <div className="p-1 my-3 border-2 rounded-md border-[#DFA0FF]">
                             <p className="text-lg font-semibold">수입 :</p>
                             <p className="">{totalMoney} 원</p>
                         </div>

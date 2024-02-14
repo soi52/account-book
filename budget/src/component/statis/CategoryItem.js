@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProgressBar from '@ramonak/react-progress-bar';
 import '../../assets/css/progressBar.css';
-import image1 from '../../assets/image/iconImage1.png';
 
 const CategoryItem = ({ item }) => {
+    const [randomNumber, setRandomNumber] = useState(0);
+
+    const getRandomNumber = () => {
+        // 이미지 파일의 총 개수에 맞게 무작위 숫자 생성
+        const maxNumber = 26; // 예를 들어 이미지 파일이 1부터 10까지 있다고 가정
+        const random = Math.floor(Math.random() * maxNumber) + 1;
+        setRandomNumber(random);
+    };
+
+    useEffect(() => {
+        getRandomNumber();
+    }, []);
+
     return (
         <div className="flex justify-between mx-2 bg-[#E5F1FF] my-3 rounded-lg p-2">
             <div className="flex items-center w-16 h-16 my-3 rounded-full bg-slate-200">
-                <img src={image1} alt="icon" />
+                <img
+                    src={`assets/image/iconImage${randomNumber}.png`}
+                    alt="icon"
+                />
             </div>
             <Link
                 to={`/category/detail`}
