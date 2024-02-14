@@ -10,9 +10,11 @@ const Header = () => {
     useEffect(() => {
         if (pathname === '/') {
         } else if (pathname === '/home') {
+            setPathStateImage('headerMoney');
             setPathStateContent('Money! 부자되기!');
             console.log(pathname);
         } else if (pathname === '/write') {
+            setPathStateImage('headerExchange');
             setPathStateContent('가계부 작성하기');
         } else if (pathname === '/read') {
             setPathStateContent('가계부 상세 내역 보기');
@@ -21,10 +23,13 @@ const Header = () => {
         } else if (pathname === '/budget') {
             setPathStateContent('한 달 예산 작성하기');
         } else if (pathname === '/category') {
+            setPathStateImage('headerCategory');
             setPathStateContent('카테고리 별 금액 모아보기');
         } else if (pathname === '/category/detail') {
+            setPathStateImage('headerCategory');
             setPathStateContent('카테고리 별 사용 내역 모아보기');
         } else if (pathname === '/calender') {
+            setPathStateImage('headerDate');
             setPathStateContent('날짜 별 금액 모아보기');
         }
     }, [pathname]);
@@ -34,7 +39,7 @@ const Header = () => {
             <Link to={'/home'}>
                 <img
                     className="header-image"
-                    src="assets/image/headerMoney.png"
+                    src={`assets/image/${pathStateImage}.png`}
                     alt="headerMoney"
                 ></img>
             </Link>
