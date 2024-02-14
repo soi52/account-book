@@ -18,6 +18,8 @@ const Header = () => {
             setPathStateContent('가계부 상세 내역 보기');
         } else if (pathname === '/update') {
             setPathStateContent('가계부 수정하기');
+        } else if (pathname === '/budget') {
+            setPathStateContent('한 달 예산 작성하기');
         } else if (pathname === '/category') {
             setPathStateContent('카테고리 별 금액 모아보기');
         } else if (pathname === '/category/detail') {
