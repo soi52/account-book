@@ -2,6 +2,7 @@ package com.finance.budget.service;
 
 import com.finance.budget.dto.BudgetRequestDto;
 import com.finance.budget.dto.BudgetResponseDto;
+import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.exception.writeBudgetException;
 import com.finance.budget.repository.BudgetRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -76,6 +77,27 @@ public class BudgetServiceImplTest {
         }
     }
 
+    enum categoryType {수입, 지출, 저금}
+
+    @DisplayName("예산 작성을 위한 '큰' 카테고리 얻기")
+    @Test
+    public void readCategory() {
+        // given
+        CategoryResponseDto categoryResponseDto1 = new CategoryResponseDto(1, "월금", categoryType.수입.name());
+        CategoryResponseDto categoryResponseDto2 = new CategoryResponseDto(1, "굴비적금", categoryType.저금.name());
+        List<CategoryResponseDto> categoryResponseDtos = new ArrayList<>();
+        categoryResponseDtos.add(categoryResponseDto1);
+        categoryResponseDtos.add(categoryResponseDto2);
+
+        // when
+        when(budgetRepository.readCategory()).thenReturn(categoryResponseDtos);
+
+        List<CategoryResponseDto> output = budgetService.readCategory();
+
+        // then
+        assertThat(categoryResponseDtos.get(0)).isEqualTo(output.get(0));
+    }
+
     @DisplayName("예산 작성하기")
     @Nested
     public class writeBudget {
@@ -136,8 +158,8 @@ public class BudgetServiceImplTest {
         date.put("year", year);
         date.put("month", month);
 
-        BudgetResponseDto budgetResponseDto1 = new BudgetResponseDto(1, 1, 3, 0, 10000, Timestamp.valueOf("2024-01-01 09:00:00"));
-        BudgetResponseDto budgetResponseDto2 = new BudgetResponseDto(2, 1, 4, 0, 20000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        BudgetResponseDto budgetResponseDto1 = new BudgetResponseDto(1, 1, 3, "월급", 0, 10000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        BudgetResponseDto budgetResponseDto2 = new BudgetResponseDto(2, 1, 4, "저금", 0, 20000, Timestamp.valueOf("2024-01-01 09:00:00"));
         List<BudgetResponseDto> budgetResponseDtos = List.of(budgetResponseDto1, budgetResponseDto2);
 
         // doReturn(budgetResponseDtos).when(budgetRepository).readBudget(date);

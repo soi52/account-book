@@ -63,20 +63,20 @@ public class BudgetRepositoryTest {
         // then
         assertThat(2).isEqualTo(output);
     }
-    
+
     @DisplayName("예산 읽기")
     @Test
     public void readBudget() {
         // given
+        BudgetResponseDto budgetResponseDto1 = new BudgetResponseDto(1, 1, 3,"월급",0, 10000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        BudgetResponseDto budgetResponseDto2 = new BudgetResponseDto(2, 1, 4,"저금",0, 20000, Timestamp.valueOf("2024-01-01 09:00:00"));
+        List<BudgetResponseDto> budgetResponseDtos = List.of(budgetResponseDto1, budgetResponseDto2);
+
         int userId = 1, year = 2024, month = 1;
         Map<String, Integer> date = new HashMap<>();
         date.put("userId", userId);
         date.put("year", year);
         date.put("month", month);
-
-        BudgetResponseDto budgetResponseDto1 = new BudgetResponseDto(1, 1, 3, 0, 10000, Timestamp.valueOf("2024-01-01 09:00:00"));
-        BudgetResponseDto budgetResponseDto2 = new BudgetResponseDto(2, 1, 4, 0, 20000, Timestamp.valueOf("2024-01-01 09:00:00"));
-        List<BudgetResponseDto> budgetResponseDtos = List.of(budgetResponseDto1, budgetResponseDto2);
 
         // when
         when(sql.selectList("Budget.read", date)).thenReturn(List.of(budgetResponseDto1, budgetResponseDto2));

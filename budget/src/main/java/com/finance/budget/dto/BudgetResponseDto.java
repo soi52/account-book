@@ -17,7 +17,7 @@ public class BudgetResponseDto {
     private int id;
     private int userId; // user id (fk)
     private int categoryId; // category Big id (fk)
-    private String content;
+    private String content; // 소카테고리 내용
     private int currentMoney; // 카테고리 별 사용 금액
     private int totalMoney; // 카테고리 별 예산 금액
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Seoul")

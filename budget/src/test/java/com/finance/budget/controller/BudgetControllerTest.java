@@ -3,7 +3,9 @@ package com.finance.budget.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.dto.BudgetRequestDto;
 import com.finance.budget.dto.BudgetResponseDto;
+import com.finance.budget.dto.CategoryResponseDto;
 import com.finance.budget.service.BudgetService;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -83,6 +85,31 @@ public class BudgetControllerTest {
         }
     }
 
+    enum categoryType {수입, 지출, 저금}
+    
+    @DisplayName("예산 작성을 위한 '큰' 카테고리 얻기")
+    @Test
+    public void readCategory() throws Exception {
+        // given
+        CategoryResponseDto categoryResponseDto1 = new CategoryResponseDto(1, "월금", categoryType.수입.name());
+        CategoryResponseDto categoryResponseDto2 = new CategoryResponseDto(1, "굴비적금", categoryType.저금.name());
+        List<CategoryResponseDto> categoryResponseDtos = new ArrayList<>();
+        categoryResponseDtos.add(categoryResponseDto1);
+        categoryResponseDtos.add(categoryResponseDto2);
+
+        // when
+        doReturn(categoryResponseDtos).when(budgetService).readCategory();
+
+        String input = new ObjectMapper().writeValueAsString(categoryResponseDtos);
+
+        // then
+        mockMvc.perform(get("/budget/category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(input))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
     @DisplayName("예산 작성하기")
     @Test
     public void writeBudget() throws Exception {
@@ -114,18 +141,19 @@ public class BudgetControllerTest {
         int userId = 1, year = 2024, month = 1;
 
         List<BudgetResponseDto> budgetResponseDtos = new ArrayList<>();
-        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 3, 1000, 10000, Timestamp.valueOf("2024-01-01 09:00:00")));
-        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 4, 2000, 20000, Timestamp.valueOf("2024-01-01 09:00:00")));
+        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 3, "월급", 1000, 10000, Timestamp.valueOf("2024-01-01 09:00:00")));
+        budgetResponseDtos.add(new BudgetResponseDto(1, 1, 4, "저금", 2000, 20000, Timestamp.valueOf("2024-01-01 09:00:00")));
 
         // when
         doReturn(budgetResponseDtos).when(budgetService).readBudget(userId, year, month);
 
-         String output = new ObjectMapper().writeValueAsString(budgetResponseDtos);
+//        String output = new ObjectMapper().writeValueAsString(budgetResponseDtos);
+        String output = new Gson().toJson(budgetResponseDtos);
 
         //then
         mockMvc.perform(get("/budget/2024/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
+                .andExpect(content().contentType("application/json; charset=UTF-8"))
                 .andExpect(content().string(output))
                 .andDo(print());
     }
